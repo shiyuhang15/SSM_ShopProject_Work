@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.mapper.UserMapper">
+    <resultMap id="usermap" type="user">
+        <id property="id" column="id"/>
+        <result property="vip_id" column="vip_id"/>
+        <result property="username" column="vip_name"/>
+        <result property="password" column="vip_password"/>
+        <result property="vip_type" column="vip_type"/>
+        <result property="vip_card" column="vip_card"/>
+        <result property="vip_realname" column="vip_realname"/>
+        <result property="vip_regdate" column="vip_regdate"/>
+        <result property="vip_point" column="vip_point"/>
+        <result property="vip_balance" column="vip_balance"/>
+        <result property="vip_email" column="vip_email"/>
+        <result property="vip_addressid" column="vip_addressid"/>
+        <result property="vip_amount" column="vip_amount"/>
+        <result property="vip_phone" column="vip_phone"/>
+        <result property="salt" column="salt"/>
+    </resultMap>
+    <insert id="saveUser" parameterType="user">
+        INSERT INTO vip_shop_table(vip_id,vip_name,vip_password,vip_card,vip_realname,vip_regdate,vip_email,vip_phone,salt)VALUES (#{vip_id},#{username},#{password},#{vip_card},#{vip_realname},#{vip_regdate},#{vip_email},#{vip_phone},#{salt})
+    </insert>
+    <select id="selUserByUsercode" parameterType="string" resultMap="usermap">
+        SELECT * from vip_shop_table WHERE vip_name=#{usercode}
+    </select>
+    <select id="selUserByname" parameterType="string" resultType="int">
+        SELECT COUNT(*) from vip_shop_table WHERE vip_name=#{username}
+    </select>
+</mapper>

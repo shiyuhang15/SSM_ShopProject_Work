@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.mapper.GoodInfoMapper">
+    <select id="selGoodInfoByGoodid" parameterType="string" resultType="goodInfo">
+        SELECT * from good_info_table WHERE good_id=#{good_id}
+    </select>
+    <insert id="addGoodInfo" parameterType="goodInfo">
+        INSERT INTO good_info_table(good_id,good_info,goodinfo_imageurl,good_price,good_count)VALUES (#{good_id},#{good_info},#{goodinfo_imageurl},#{good_price},#{good_count})
+    </insert>
+</mapper>

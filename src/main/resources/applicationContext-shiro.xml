@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--加密方式-->
+    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="MD5"/>
+        <property name="hashIterations" value="3"/>
+    </bean>
+    <!--自定义认证与授权类-->
+    <bean id="realm" class="com.syh.realm.CustomRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+    <!--核心管理器SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+       <property name="realm" ref="realm"/>
+    </bean>
+    <!--shiro工厂-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--需要认证的请求-->
+        <property name="loginUrl" value="/login"/>
+        <!--设置权限过滤形式-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--设置首页可以匿名访问-->
+                /=anon
+                /favicon.ico=anon
+                /js/**=anon
+                /reg.jsp=anon
+                /login.jsp=anon
+                /selUserByname=anon
+
+                <!--退出-->
+                /logout=logout
+                <!--设置所有请求都需要认证-->
+                /addShopCar=authc
+                /login=authc
+                /good.jsp=authc
+            </value>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.mapper.ShopCarMapper">
+    <insert id="addShopCar" parameterType="shopCar">
+        INSERT INTO shop_car_table(vip_id,good_info,good_name,info_count,good_price)VALUES (#{vip_id},#{good_info},#{good_name},#{info_count},#{good_price})
+    </insert>
+    <select id="selShopCar" resultType="shopCar">
+        SELECT * from shop_car_table
+    </select>
+</mapper>

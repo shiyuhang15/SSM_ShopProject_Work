@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.mapper.GoodMapper">
+    <insert id="addGood" parameterType="good">
+        INSERT INTO good_shop_table(good_id,good_name,good_type,buss_name,good_createtime,good_imageurl,good_isfree,good_ischange)
+        VALUES (#{good_id},#{good_name},#{good_type},#{buss_name},#{good_createtime},#{good_imageurl},#{good_isfree},#{good_ischange})
+    </insert>
+    <select id="selAllGood" resultType="good">
+        SELECT * from good_shop_table
+    </select>
+    <delete id="delGood" parameterType="int">
+        DELETE FROM good_shop_table WHERE id=#{id}
+    </delete>
+    <select id="selGoodByType" parameterType="string" resultType="good">
+        SELECT * from good_shop_table WHERE good_type=#{good_type}
+    </select>
+    <select id="selGoodByGoodId" parameterType="string" resultType="good">
+        SELECT * from good_shop_table WHERE good_id=#{good_id}
+    </select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.mapper.BussMapper">
+    <select id="selBussByName" parameterType="string" resultType="int">
+        SELECT COUNT(*) from buss_info_table WHERE buss_name=#{buss_name}
+    </select>
+    <insert id="addBuss" parameterType="buss">
+        INSERT INTO buss_info_table (buss_name,buss_company,buss_address)VALUES (#{buss_name},#{buss_company},#{buss_address})
+    </insert>
+    <select id="selAllBuss" resultType="buss">
+        select * from buss_info_table
+    </select>
+</mapper>
